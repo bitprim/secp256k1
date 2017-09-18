@@ -10,9 +10,9 @@ This library is a work in progress and is being used to research best practices.
 Features:
 * secp256k1 ECDSA signing/verification and key generation.
 * Adding/multiplying private/public keys.
-* Serialization/parsing of private keys, public keys, signatures.
+* Serialization/parsing of private keys, public keys, and signatures.
 * Constant time, constant memory access signing and pubkey generation.
-* Derandomized DSA (via RFC6979 or with a caller provided function.)
+* Derandomized DSA (via RFC6979 or with a caller provided function).
 * Very efficient implementation.
 
 Implementation details
@@ -49,7 +49,7 @@ Implementation details
   * No data-dependent branches
   * The precomputed tables add and eventually subtract points for which no known scalar (private key) is known, preventing even an attacker with control over the private key used to control the data internally.
 
-Build steps
+Build steps (Linux)
 -----------
 ```
 $ git clone https://github.com/bitprim/secp256k1.git
