@@ -49,7 +49,7 @@ Implementation details
   * No data-dependent branches
   * The precomputed tables add and eventually subtract points for which no known scalar (private key) is known, preventing even an attacker with control over the private key used to control the data internally.
 
-Build steps (Linux)
+Build steps (Linux/Windows with MinGw/OSX)
 -----------
 ```
 $ git clone https://github.com/bitprim/secp256k1.git
@@ -60,4 +60,17 @@ $ cmake .. -DENABLE_MODULE_RECOVERY=ON
 $ make -j2
 $ sudo make install
 ```
+
+Build steps (Windows with Visual Studio)
+-----------
+```
+$ git clone https://github.com/bitprim/secp256k1.git
+$ cd secp256k1
+$ mkdir build
+$ cd build
+$ cmake .. -DENABLE_MODULE_RECOVERY=ON 
+```
+
+The last step will generate the Visual Studio files; you'll probably want to use `secp256k1.sln`
+
 [badge.Gitter]: https://img.shields.io/badge/gitter-join%20chat-blue.svg
