@@ -16,7 +16,7 @@ Table of Contents
       * [Implementation details](#implementation-details)
       * [Installation](#installation)
         * [Using Conan](#using-conan)
-        * [Manual build steps] (#manual-build-steps)
+        * [Manual build steps (Linux/Windows with MinGw/OSX)] (#manual-build-steps-linuxwindows-with-mingwosx)
 
 ## Features
 
