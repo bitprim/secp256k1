@@ -1,5 +1,5 @@
-libsecp256k1 <a target="_blank" href="https://gitter.im/bitprim/Lobby">![Gitter Chat][badge.Gitter]</a>
-============
+#libsecp256k1 <a target="_blank" href="https://gitter.im/bitprim/Lobby">![Gitter Chat][badge.Gitter]</a>
+
 Optimized C library for EC operations on curve secp256k1.
 This library is a work in progress and is being used to research best practices. Use at your own risk.
 
@@ -7,7 +7,18 @@ This library is a work in progress and is being used to research best practices.
 |:------:|:-:|:-:|:-:|
 | [![Build Status](https://travis-ci.org/bitprim/secp256k1.svg)](https://travis-ci.org/bitprim/secp256k1)       | [![Build StatusB](https://travis-ci.org/bitprim/secp256k1.svg?branch=dev)](https://travis-ci.org/bitprim/secp256k1?branch=dev)  | [![Appveyor Status](https://ci.appveyor.com/api/projects/status/github/bitprim/secp256k1?svg=true)](https://ci.appveyor.com/project/bitprim/secp256k1)  | [![Appveyor StatusB](https://ci.appveyor.com/api/projects/status/github/bitprim/secp256k1?branch=dev&svg=true)](https://ci.appveyor.com/project/bitprim/secp256k1?branch=dev)  |
 
-Features:
+Table of Contents
+=================
+
+   * [libsecp256k1](#libsecp256k1)
+      * [Features:](#features)
+      * [Implementation details](#implementation-details)
+      * [Installation](#installation)
+        * [Using Conan](#using-conan)
+        * [Manual build steps] (#manual-build-steps)
+
+## Features
+
 * secp256k1 ECDSA signing/verification and key generation.
 * Adding/multiplying private/public keys.
 * Serialization/parsing of private keys, public keys, and signatures.
@@ -15,8 +26,7 @@ Features:
 * Derandomized DSA (via RFC6979 or with a caller provided function).
 * Very efficient implementation.
 
-Implementation details
-----------------------
+## Implementation details
 
 * General
   * No runtime heap allocation.
@@ -48,9 +58,28 @@ Implementation details
   * Access the table with branch-free conditional moves so memory access is uniform.
   * No data-dependent branches
   * The precomputed tables add and eventually subtract points for which no known scalar (private key) is known, preventing even an attacker with control over the private key used to control the data internally.
+  
+## Installation
 
-Build steps (Linux/Windows with MinGw/OSX)
------------
+### Using Conan
+
+Conan is a Python package for dependency management; it only requires Python and Pip.
+With Conan, install can be performed on any OS. If there are no prebuilt binaries for a given
+OS-compiler-arch combination, Conan will build from source.
+
+```
+pip install conan
+conan remote add bitprim https://api.bintray.com/conan/bitprim/bitprim
+conan install secp256k1/0.1@bitprim/stable
+```
+
+The last step will install binaries and headers in Conan's cache, a directory outside the usual
+system paths. This will avoid conflict with system packages such as boost.
+Also, notice it references the stable version 0.1. To see which versions are available,
+please check [Bintray](https://bintray.com/bitprim/bitprim/secp256k1%3Abitprim).
+
+### Manual build steps (Linux/Windows with MinGw/OSX)
+
 ```
 $ git clone https://github.com/bitprim/secp256k1.git
 $ cd secp256k1
@@ -60,17 +89,5 @@ $ cmake .. -DENABLE_MODULE_RECOVERY=ON
 $ make -j2
 $ sudo make install
 ```
-
-Build steps (Windows with Visual Studio)
------------
-```
-$ git clone https://github.com/bitprim/secp256k1.git
-$ cd secp256k1
-$ mkdir build
-$ cd build
-$ cmake .. -DENABLE_MODULE_RECOVERY=ON 
-```
-
-The last step will generate the Visual Studio files; you'll probably want to use `secp256k1.sln`
 
 [badge.Gitter]: https://img.shields.io/badge/gitter-join%20chat-blue.svg
