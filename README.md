@@ -11,11 +11,12 @@ This library is a work in progress and is being used to research best practices.
 Table of Contents
 =================
 
-    * [Features:](#features)
-    * [Implementation details](#implementation-details)
-    * [Installation](#installation)
-      * [Using Conan](#using-conan)
-      * [Manual build steps] (#manual-build-steps)
+   * [libsecp256k1](#libsecp256k1)
+      * [Features:](#features)
+      * [Implementation details](#implementation-details)
+      * [Installation](#installation)
+        * [Using Conan](#using-conan)
+        * [Manual build steps] (#manual-build-steps)
 
 ## Features
 
