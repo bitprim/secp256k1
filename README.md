@@ -16,7 +16,7 @@ Table of Contents
       * [Implementation details](#implementation-details)
       * [Installation](#installation)
         * [Using Conan](#using-conan)
-        * [Manual build steps (Linux/Windows with MinGw/OSX)] (#manual-build-steps-linuxwindows-with-mingwosx)
+        * [Manual build steps] (#manual-build-steps)
 
 ## Features
 
@@ -79,7 +79,9 @@ system paths. This will avoid conflict with system packages such as boost.
 Also, notice it references the stable version 0.1. To see which versions are available,
 please check [Bintray](https://bintray.com/bitprim/bitprim/secp256k1%3Abitprim).
 
-### Manual build steps (Linux/Windows with MinGw/OSX)
+### Manual build steps
+
+For Linux, Windows with MinGw, and OSX
 
 ```
 $ git clone https://github.com/bitprim/secp256k1.git
