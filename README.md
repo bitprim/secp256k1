@@ -1,4 +1,5 @@
-#libsecp256k1 <a target="_blank" href="https://gitter.im/bitprim/Lobby">![Gitter Chat][badge.Gitter]</a>
+libsecp256k1 <a target="_blank" href="https://gitter.im/bitprim/Lobby">![Gitter Chat][badge.Gitter]</a>
+============
 
 Optimized C library for EC operations on curve secp256k1.
 This library is a work in progress and is being used to research best practices. Use at your own risk.
@@ -10,12 +11,11 @@ This library is a work in progress and is being used to research best practices.
 Table of Contents
 =================
 
-   * [libsecp256k1](#libsecp256k1)
-      * [Features:](#features)
-      * [Implementation details](#implementation-details)
-      * [Installation](#installation)
-        * [Using Conan](#using-conan)
-        * [Manual build steps] (#manual-build-steps)
+    * [Features:](#features)
+    * [Implementation details](#implementation-details)
+    * [Installation](#installation)
+      * [Using Conan](#using-conan)
+      * [Manual build steps] (#manual-build-steps)
 
 ## Features
 
