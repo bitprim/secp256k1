@@ -17,6 +17,8 @@ Table of Contents
       * [Installation](#installation)
         * [Using Conan](#using-conan)
         * [Manual build steps](#manual-build-steps)
+            * [For Linux/Windows with MinGw/OSX](#for-linux-windows-with-mingw-and-osx)
+            * [For Windows with Visual Studio](#for-windows-with-visual-studio)
 
 ## Features
 
