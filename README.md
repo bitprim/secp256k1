@@ -81,7 +81,7 @@ please check [Bintray](https://bintray.com/bitprim/bitprim/secp256k1%3Abitprim).
 
 ### Manual build steps
 
-For Linux, Windows with MinGw, and OSX
+#### For Linux, Windows with MinGw, and OSX
 
 ```
 $ git clone https://github.com/bitprim/secp256k1.git
@@ -91,6 +91,19 @@ $ cd build
 $ cmake .. -DENABLE_MODULE_RECOVERY=ON 
 $ make -j2
 $ sudo make install
+```
+
+#### For Windows with Visual Studio
+
+From a [Visual Studio Developer Command Prompt](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs):
+
+```
+$ git clone https://github.com/bitprim/secp256k1.git
+$ cd secp256k1
+$ mkdir build
+$ cd build
+$ cmake .. -DENABLE_MODULE_RECOVERY=ON -DUSE_CONAN=OFF -DNO_CONAN_AT_ALL=ON
+$ msbuild ALL_BUILD.vcxproj
 ```
 
 [badge.Gitter]: https://img.shields.io/badge/gitter-join%20chat-blue.svg
