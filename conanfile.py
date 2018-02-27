@@ -50,10 +50,25 @@ def option_on_off(option):
 
 #     return defs
     
+def get_content(path):
+    print(os.path.dirname(os.path.abspath(__file__)))
+    print(os.getcwd())
+    with open(path, 'r') as f:
+        return f.read()
+
+def get_version():
+    return get_content('conan_version')
+
+def get_channel():
+    return get_content('conan_channel')
+
 
 class Secp256k1Conan(ConanFile):
     name = "secp256k1"
-    version = "0.3"
+
+    # version = "0.3"
+    version = get_version()
+
     license = "http://www.boost.org/users/license.html"
     url = "https://github.com/bitprim/secp256k1"
     description = "Optimized C library for EC operations on curve secp256k1"
@@ -112,6 +127,8 @@ class Secp256k1Conan(ConanFile):
 
     generators = "cmake"
     build_policy = "missing"
+
+    exports = "conan_channel", "conan_version"
     exports_sources = "src/*", "include/*", "CMakeLists.txt", "cmake/*", "secp256k1Config.cmake.in", "bitprimbuildinfo.cmake", "contrib/*", "test/*"
 
 
