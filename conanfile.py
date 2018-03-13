@@ -53,7 +53,7 @@ def option_on_off(option):
 
 #     return defs
     
-def get_content(path):
+def get_content(file_name):
     # print(os.path.dirname(os.path.abspath(__file__)))
     # print(os.getcwd())
     # with open(path, 'r') as f:
