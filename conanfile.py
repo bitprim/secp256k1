@@ -56,7 +56,10 @@ def option_on_off(option):
 def get_content(path):
     # print(os.path.dirname(os.path.abspath(__file__)))
     # print(os.getcwd())
-    with open(path, 'r') as f:
+    # with open(path, 'r') as f:
+    #     return f.read()
+    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
+    with open(file_path, 'r') as f:
         return f.read()
 
 def get_version():
