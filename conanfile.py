@@ -30,13 +30,16 @@ def option_on_off(option):
 def get_content(file_name):
     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
     with open(file_path, 'r') as f:
-        return f.read()
+        return f.read().replace('\n', '').replace('\r', '')
 
 def get_version():
     return get_content('conan_version')
 
 def get_channel():
     return get_content('conan_channel')
+
+def get_user():
+    return get_content('conan_user')
 
 def get_conan_req_version():
     return get_content('conan_req_version')
@@ -130,7 +133,7 @@ class Secp256k1Conan(ConanFile):
     generators = "cmake"
     build_policy = "missing"
 
-    exports = "conan_channel", "conan_version", "conan_req_version"
+    exports = "conan_channel", "conan_version", "conan_req_version", "conan_user"
     exports_sources = "src/*", "include/*", "CMakeLists.txt", "cmake/*", "secp256k1Config.cmake.in", "bitprimbuildinfo.cmake", "contrib/*", "test/*"
 
 

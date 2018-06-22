@@ -7,7 +7,7 @@ import cpuid
 
 def get_content(path):
     with open(path, 'r') as f:
-        return f.read()
+        return f.read().replace('\n', '').replace('\r', '')
 
 def get_version():
     return get_content('conan_version')
@@ -15,9 +15,12 @@ def get_version():
 def get_channel():
     return get_content('conan_channel')
 
+def get_user():
+    return get_content('conan_user')
+
 def get_conan_vars():
     login_username = os.getenv("CONAN_LOGIN_USERNAME", "bitprim-bintray")
-    username = os.getenv("CONAN_USERNAME", "bitprim")
+    username = os.getenv("CONAN_USERNAME", get_user())
     channel = os.getenv("CONAN_CHANNEL", get_channel())
     version = os.getenv("CONAN_VERSION", get_version())
     return login_username, username, channel, version
