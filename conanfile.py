@@ -21,50 +21,50 @@ import os
 from conans import ConanFile, CMake
 from conans import __version__ as conan_version
 from conans.model.version import Version
-import importlib
+from bitprim_utils import option_on_off, get_version, get_channel, get_user, get_conan_req_version, get_cpu_microarchitecture, get_cpuid
 
 
-def option_on_off(option):
-    return "ON" if option else "OFF"
+# def option_on_off(option):
+#     return "ON" if option else "OFF"
     
-def get_content(file_name):
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
-    with open(file_path, 'r') as f:
-        return f.read().replace('\n', '').replace('\r', '')
+# def get_content(file_name):
+#     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
+#     with open(file_path, 'r') as f:
+#         return f.read().replace('\n', '').replace('\r', '')
 
-def get_version():
-    return get_content('conan_version')
+# def get_version():
+#     return get_content('conan_version')
 
-def get_channel():
-    return get_content('conan_channel')
+# def get_channel():
+#     return get_content('conan_channel')
 
-def get_user():
-    return get_content('conan_user')
+# def get_user():
+#     return get_content('conan_user')
 
-def get_conan_req_version():
-    return get_content('conan_req_version')
+# def get_conan_req_version():
+#     return get_content('conan_req_version')
 
-microarchitecture_default = 'x86_64'
+# microarchitecture_default = 'x86_64'
 
-def get_cpuid():
-    try:
-        # print("*** cpuid OK")
-        cpuid = importlib.import_module('cpuid')
-        return cpuid
-    except ImportError:
-        # print("*** cpuid could not be imported")
-        return None
+# def get_cpuid():
+#     try:
+#         # print("*** cpuid OK")
+#         cpuid = importlib.import_module('cpuid')
+#         return cpuid
+#     except ImportError:
+#         # print("*** cpuid could not be imported")
+#         return None
 
-def get_cpu_microarchitecture_or_default(default):
-    cpuid = get_cpuid()
-    if cpuid != None:
-        # return '%s%s' % cpuid.cpu_microarchitecture()
-        return '%s' % (''.join(cpuid.cpu_microarchitecture()))
-    else:
-        return default
+# def get_cpu_microarchitecture_or_default(default):
+#     cpuid = get_cpuid()
+#     if cpuid != None:
+#         # return '%s%s' % cpuid.cpu_microarchitecture()
+#         return '%s' % (''.join(cpuid.cpu_microarchitecture()))
+#     else:
+#         return default
 
-def get_cpu_microarchitecture():
-    return get_cpu_microarchitecture_or_default(microarchitecture_default)
+# def get_cpu_microarchitecture():
+#     return get_cpu_microarchitecture_or_default(microarchitecture_default)
 
 
 class Secp256k1Conan(ConanFile):
