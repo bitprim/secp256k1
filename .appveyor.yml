@@ -65,7 +65,9 @@ install:
   - echo "*******************************************************"
 
   - ps: |
-      $host.SetShouldExit(0)
+      Exit-AppveyorBuild
+      # $host.SetShouldExit(0)
+      # if (-not (Test-Path env:FOO)) { $env:FOO = 'bar' }
  
 
   - echo "*******************************************************"
