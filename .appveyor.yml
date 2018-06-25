@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2017 Bitprim developers (see AUTHORS)
+# Copyright (c) 2017-2018 Bitprim Inc.
 #
 # This file is part of Bitprim.
 #
@@ -65,7 +65,7 @@ test_script:
   - git submodule init
   - git submodule update --remote
   - dir *.*
-  
+
   # - git fetch --unshallow
   # - export BITPRIM_BUILD_NUMBER="$(git describe)"
   - for /f %%i in ('git describe') do set BITPRIM_BUILD_NUMBER=%%i
