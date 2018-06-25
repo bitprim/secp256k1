@@ -89,7 +89,7 @@ class Secp256k1Conan(ConanFile):
     generators = "cmake"
     build_policy = "missing"
 
-    exports = "conan_channel", "conan_version", "conan_req_version", "conan_user"
+    exports = "conan_channel", "conan_version", "conan_req_version", "conan_user", "ci_utils/*"
     exports_sources = "src/*", "include/*", "CMakeLists.txt", "cmake/*", "secp256k1Config.cmake.in", "bitprimbuildinfo.cmake", "contrib/*", "test/*"
 
 
