@@ -1,0 +1,3 @@
+[submodule "bitprim-ci-utils"]
+	path = bitprim-ci-utils
+	url = https://github.com/bitprim/bitprim-ci-utils.git
