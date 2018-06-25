@@ -11,10 +11,8 @@ if __name__ == "__main__":
     builder.add_common_builds(shared_option_name="%s:shared" % name, pure_c=True)
 
     filtered_builds = []
+    # for settings, options, env_vars, build_requires in builder.builds:
     for settings, options, env_vars, build_requires, reference in builder.items:
-
-        # print(settings)
-        # print(options)
 
         if settings["build_type"] == "Release" \
                 and not("%s:shared"  % name in options and options["%s:shared" % name]):
@@ -28,7 +26,6 @@ if __name__ == "__main__":
 
             marchs = ["x86_64", ''.join(cpuid.cpu_microarchitecture()), "haswell", "skylake", "skylake-avx512"]
             handle_microarchs("%s:microarchitecture" % name, marchs, filtered_builds, settings, options, env_vars, build_requires)
-  
             # filtered_builds.append([settings, options, env_vars, build_requires])
 
     builder.builds = filtered_builds
