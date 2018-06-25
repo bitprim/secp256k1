@@ -52,7 +52,22 @@ environment:
         - MINGW_CONFIGURATIONS: "5@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "4.9@x86_64@seh@posix"     
 
+
+init:
+  - echo "*******************************************************"
+  - echo "init:"
+  - echo "*******************************************************"
+
+
 install:
+  - echo "*******************************************************"
+  - echo "install:"
+  - echo "*******************************************************"
+
+  - ps: |
+      $host.SetShouldExit(0)
+ 
+
   - echo "*******************************************************"
   - echo %APPVEYOR_REPO_TAG%
   - echo %APPVEYOR_REPO_BRANCH%
