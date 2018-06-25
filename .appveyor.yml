@@ -65,18 +65,10 @@ init:
       if ($Env:APPVEYOR_REPO_BRANCH -ceq "master") {
         Write-Host "branch is master"
       }
-      
 
       if ($Env:APPVEYOR_REPO_BRANCH -ceq "feature_ci_adjust_compilers") {
         Write-Host "branch is feature_ci_adjust_compilers"
       }
-
-
-# if (-not ([string]::IsNullOrEmpty($version)))
-# {
-#     $request += "/" + $version
-# }
-
       Exit-AppveyorBuild
 
 
