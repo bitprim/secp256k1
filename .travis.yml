@@ -93,8 +93,8 @@ install:
 
   - |
     if [[ "${PUSH_TO_REPOS}" != "true" ]]; then
-      chmod +x .travis/install.sh
-      ./.travis/install.sh
+      chmod +x ci_utils/.travis/install.sh
+      ./ci_utils/.travis/install.sh
     fi    
 
 script:
@@ -108,8 +108,8 @@ script:
       ./.travis/push_other_repo.sh
     else
       cd ${TRAVIS_BUILD_DIR}
-      chmod +x .travis/run.sh
-      ./.travis/run.sh
+      chmod +x ci_utils/.travis/run.sh
+      ./ci_utils/.travis/run.sh
     fi  
 
 notifications:

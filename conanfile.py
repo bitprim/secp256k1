@@ -21,7 +21,7 @@ import os
 from conans import ConanFile, CMake
 from conans import __version__ as conan_version
 from conans.model.version import Version
-from ci_utils.utils import option_on_off, get_version, get_channel, get_user, get_conan_req_version, get_cpu_microarchitecture, get_cpuid
+from ci_utils.utils import option_on_off, get_version, get_conan_req_version, get_cpu_microarchitecture, get_cpuid
 
 class Secp256k1Conan(ConanFile):
     name = "secp256k1"
@@ -31,9 +31,8 @@ class Secp256k1Conan(ConanFile):
     description = "Optimized C library for EC operations on curve secp256k1"
     settings = "os", "compiler", "build_type", "arch"
 
-    if conan_version < Version(get_conan_req_version()):
+    if Version(conan_version) < Version(get_conan_req_version()):
         raise Exception ("Conan version should be greater or equal than %s" % (get_conan_req_version(), ))
-
 
     #TODO(fernando): See what to do with shared/static option... (not supported yet in Cmake)
     
@@ -90,15 +89,12 @@ class Secp256k1Conan(ConanFile):
     build_policy = "missing"
 
     exports = "conan_channel", "conan_version", "conan_req_version", "conan_user", "ci_utils/*"
-    exports_sources = "src/*", "include/*", "CMakeLists.txt", "cmake/*", "secp256k1Config.cmake.in", "bitprimbuildinfo.cmake", "contrib/*", "test/*"
-
+    exports_sources = "src/*", "include/*", "CMakeLists.txt", "cmake/*", "secp256k1Config.cmake.in", "contrib/*", "test/*"
+    #, "bitprimbuildinfo.cmake"
 
     # with_benchmark = False
     # with_tests = True
     # with_openssl_tests = False
-
-
-
 
 
     # https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html
