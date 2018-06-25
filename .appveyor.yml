@@ -19,7 +19,7 @@
 
 branches:
   only:
-    # - master
+    - master
     - dev
     - /^v\d+\.\d+\.\d+$/
     - /^release-\d+\.\d+\.\d+$/
@@ -53,6 +53,12 @@ environment:
         # - MINGW_CONFIGURATIONS: "4.9@x86_64@seh@posix"     
 
 install:
+  - echo "*******************************************************"
+  - echo %APPVEYOR_REPO_TAG%
+  - echo %APPVEYOR_REPO_BRANCH%
+  - echo %APPVEYOR_REPO_TAG_NAME%
+  - echo "*******************************************************"
+
   - set PATH=%PATH%;%PYTHON%/Scripts/
 
   - pip.exe install conan --upgrade
