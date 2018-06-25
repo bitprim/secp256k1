@@ -61,13 +61,21 @@ init:
   - ps: |
       # $host.SetShouldExit(0)
       # if (-not (Test-Path env:FOO)) { $env:FOO = 'bar' }
-      if (env:APPVEYOR_REPO_BRANCH -ceq "master") {
+      #  -And [string]::IsNullOrEmpty(env:APPVEYOR_REPO_TAG_NAME)
+      if ($Env:APPVEYOR_REPO_BRANCH -ceq "master") {
         Write-Host "branch is master"
       }
+      
 
-      if (env:APPVEYOR_REPO_BRANCH -ceq "feature_ci_adjust_compilers") {
+      if ($Env:APPVEYOR_REPO_BRANCH -ceq "feature_ci_adjust_compilers") {
         Write-Host "branch is feature_ci_adjust_compilers"
       }
+
+
+# if (-not ([string]::IsNullOrEmpty($version)))
+# {
+#     $request += "/" + $version
+# }
 
       Exit-AppveyorBuild
 
