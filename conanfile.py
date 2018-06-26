@@ -88,7 +88,7 @@ class Secp256k1Conan(ConanFile):
     generators = "cmake"
     build_policy = "missing"
 
-    exports = "conan_channel", "conan_version", "conan_req_version", "conan_user", "ci_utils/*"
+    exports = "conan_version", "conan_req_version", "conan_user", "ci_utils/*"      #"conan_channel"
     exports_sources = "src/*", "include/*", "CMakeLists.txt", "cmake/*", "secp256k1Config.cmake.in", "contrib/*", "test/*"
     #, "bitprimbuildinfo.cmake"
 
@@ -229,6 +229,9 @@ class Secp256k1Conan(ConanFile):
         
 
     def requirements(self):
+        self.output.info("********************* self.channel: %s" % (self.channel,))
+        # self.requires("Say/0.1@%s/%s" % (self.user, self.channel))
+
         if self.options.with_bignum_lib:
             if self.settings.os == "Windows":
                 self.requires("mpir/3.0.0@bitprim/stable")

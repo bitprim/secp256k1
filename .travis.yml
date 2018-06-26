@@ -125,15 +125,15 @@ script:
     fi
     echo "${BITPRIM_CONAN_CHANNEL}"
 
-    pwd
-    ls -ltra
+    # pwd
+    # ls -ltra
 
-    if [ -e conan_channel ] then
-      echo "Creating conan_channel file"
-      printf "${BITPRIM_CONAN_CHANNEL}" > conan_channel
-    fi
+    # if [ -e conan_channel ] then
+    #   echo "Creating conan_channel file"
+    #   printf "${BITPRIM_CONAN_CHANNEL}" > conan_channel
+    # fi
 
-    ls -ltra
+    # ls -ltra
 
 
 
