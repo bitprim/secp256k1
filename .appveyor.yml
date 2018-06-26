@@ -67,7 +67,6 @@ init:
         Exit-AppveyorBuild
       }
 
-      # if ($Env:APPVEYOR_REPO_COMMIT_MESSAGE -like "*[skip appveyor]*") {
       # if ($Env:APPVEYOR_REPO_COMMIT_MESSAGE -like "*skip appveyor*") {
       if ($Env:APPVEYOR_REPO_COMMIT_MESSAGE -like "*\[skip appveyor\]*") {
         Write-Host "[skip appveyor] detected in commit message, exiting"
