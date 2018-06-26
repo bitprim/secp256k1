@@ -74,7 +74,7 @@ matrix:
       #   env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39
 
       # macOS, apple-Clang, libc++ -------------------------------------------------
-      - <<: *osx
+        - <<: *osx
         osx_image: xcode9
         env: CONAN_APPLE_CLANG_VERSIONS=9.0
              BITPRIM_RUN_TESTS=true
@@ -125,12 +125,15 @@ script:
     fi
     echo "${BITPRIM_CONAN_CHANNEL}"
 
+    pwd
+    ls -ltra
 
-# - dev
-# - /^v\d+\.\d+\.\d+$/
-# - /^release-\d+\.\d+\.\d+$/
-# - /^feature-ci-.+$/
-# - /^feature_ci_.+$/
+    if [ -e conan_channel ] then
+      echo "Creating conan_channel file"
+      printf "${BITPRIM_CONAN_CHANNEL}" > conan_channel
+    fi
+
+    ls -ltra
 
 
 

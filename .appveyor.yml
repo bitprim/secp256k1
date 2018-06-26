@@ -117,6 +117,8 @@ test_script:
   #   fi
   #   echo "${BITPRIM_CONAN_CHANNEL}"
   - echo %APPVEYOR_REPO_BRANCH%
+  - dir *.*
+  - cd
 
   - ps: |
       # elseif ($Env:APPVEYOR_REPO_BRANCH -like "release*") {
@@ -133,12 +135,13 @@ test_script:
       else {
         $Env:BITPRIM_CONAN_CHANNEL = "stable"
       }
+      
+      if ([System.IO.File]::Exists("conan_channel")) {
+        Write-Host "Creating conan_channel file"
+        $Env:BITPRIM_CONAN_CHANNEL | Out-File conan_channel
+      }
 
+  - dir *.*
   - echo %BITPRIM_CONAN_CHANNEL%
-
-
-
-
-
 
   - python build.py
