@@ -87,6 +87,8 @@ matrix:
         osx_image: xcode7.3
         env: CONAN_APPLE_CLANG_VERSIONS=7.3
         
+init:
+  - travis_terminate 0        
 
 install:
   - cd ${TRAVIS_BUILD_DIR}
