@@ -54,12 +54,12 @@ environment:
 
 
 init:
-  - echo "*******************************************************"
-  - echo %APPVEYOR_REPO_TAG%
-  - echo %APPVEYOR_REPO_BRANCH%
-  - echo %APPVEYOR_REPO_TAG_NAME%
-  - echo %APPVEYOR_REPO_COMMIT_MESSAGE%
-  - echo "*******************************************************"
+  # - echo "*******************************************************"
+  # - echo %APPVEYOR_REPO_TAG%
+  # - echo %APPVEYOR_REPO_BRANCH%
+  # - echo %APPVEYOR_REPO_TAG_NAME%
+  # - echo %APPVEYOR_REPO_COMMIT_MESSAGE%
+  # - echo "*******************************************************"
 
   - ps: |
       if ($Env:APPVEYOR_REPO_BRANCH -ceq "master" -And [string]::IsNullOrEmpty($Env:APPVEYOR_REPO_TAG_NAME)) {
@@ -67,20 +67,11 @@ init:
         Exit-AppveyorBuild
       }
 
-      # if ($Env:APPVEYOR_REPO_COMMIT_MESSAGE -like "*skip appveyor*") {
-      if ($Env:APPVEYOR_REPO_COMMIT_MESSAGE -like "*\[skip appveyor\]*") {
-        Write-Host "[skip appveyor] detected in commit message, exiting"
-        Exit-AppveyorBuild
-      }
-
-      # if ($Env:APPVEYOR_REPO_BRANCH -ceq "feature_ci_adjust_compilers") {
-      #   Write-Host "branch is feature_ci_adjust_compilers"
+      # Note(fernando): It is implemented natively in Appveyor...
+      # if ($Env:APPVEYOR_REPO_COMMIT_MESSAGE -like "*\[skip appveyor\]*") {
+      #   Write-Host "[skip appveyor] detected in commit message, exiting"
+      #   Exit-AppveyorBuild
       # }
-      
-
-
-      
-
 
 install:
   # - echo "*******************************************************"
