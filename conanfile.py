@@ -30,7 +30,6 @@ class Secp256k1Conan(ConanFile):
     url = "https://github.com/bitprim/secp256k1"
     description = "Optimized C library for EC operations on curve secp256k1"
     settings = "os", "compiler", "build_type", "arch"
-    # settings = "os", "compiler", "build_type", "arch", "os_build", "arch_build"
 
     if Version(conan_version) < Version(get_conan_req_version()):
         raise Exception ("Conan version should be greater or equal than %s. Detected: %s." % (get_conan_req_version(), conan_version))
