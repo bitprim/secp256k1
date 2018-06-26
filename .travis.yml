@@ -88,15 +88,11 @@ matrix:
         env: CONAN_APPLE_CLANG_VERSIONS=7.3
         
 before_install:
-
   - |
     if [[ "${TRAVIS_COMMIT_MESSAGE}" = *"[skip travis]"* ]]; then
       echo "[skip travis] detected in commit message, exiting"
       travis_terminate 0
     fi
-    # if [[ $string = *"My long"* ]]; then
-    #   echo "It's there!"
-    # fi
 
 install:
   - cd ${TRAVIS_BUILD_DIR}
