@@ -87,8 +87,19 @@ matrix:
         osx_image: xcode7.3
         env: CONAN_APPLE_CLANG_VERSIONS=7.3
         
-init:
-  - travis_terminate 0        
+before_install:
+
+  - |
+    if [[ "${TRAVIS_COMMIT_MESSAGE}" = *"[skip travis]"* ]]; then
+      echo "[skip travis] detected in commit message, exiting"
+      travis_terminate 0
+    fi
+    # if [[ $string = *"My long"* ]]; then
+    #   echo "It's there!"
+    # fi
+
+  - travis_terminate 0
+
 
 install:
   - cd ${TRAVIS_BUILD_DIR}
