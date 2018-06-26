@@ -98,9 +98,6 @@ before_install:
     #   echo "It's there!"
     # fi
 
-  - travis_terminate 0
-
-
 install:
   - cd ${TRAVIS_BUILD_DIR}
 
