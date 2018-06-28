@@ -38,37 +38,6 @@ osx: &osx
    os: osx
    language: generic
 
-jobs:
-  include:
-    - stage: build
-      os: linux
-      sudo: required
-      language: python
-      python: "3.6"
-      services:
-        - docker
-      env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8
-          BITPRIM_RUN_TESTS=true
-    - stage: build
-      os: osx
-      sudo: required
-      language: generic
-      osx_image: xcode8.3
-      env: CONAN_APPLE_CLANG_VERSIONS=8.1
-
-
-    - stage: unit tests
-      script: "Running unit tests (1)"
-    - stage: unit tests
-      script: "Running unit tests (2)"
-    - stage: deploy to staging
-      script: skip
-    - stage: test staging
-      script: 'curl http://sf-stages-staging.herokuapp.com'
-    - stage: deploy to production
-      script: skip
-    - stage: test production
-      script: 'curl http://sf-stages-production.herokuapp.com'
 
 # matrix:
 #    include:
@@ -168,6 +137,39 @@ script:
       chmod +x ci_utils/.travis/run.sh
       ./ci_utils/.travis/run.sh
     fi  
+
+jobs:
+  include:
+    - stage: build
+      os: linux
+      sudo: required
+      language: python
+      python: "3.6"
+      services:
+        - docker
+      env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8
+          BITPRIM_RUN_TESTS=true
+    - stage: build
+      os: osx
+      sudo: required
+      language: generic
+      osx_image: xcode8.3
+      env: CONAN_APPLE_CLANG_VERSIONS=8.1
+
+
+    - stage: unit tests
+      script: "Running unit tests (1)"
+    - stage: unit tests
+      script: "Running unit tests (2)"
+    - stage: deploy to staging
+      script: skip
+    - stage: test staging
+      script: 'curl http://sf-stages-staging.herokuapp.com'
+    - stage: deploy to production
+      script: skip
+    - stage: test production
+      script: 'curl http://sf-stages-production.herokuapp.com'
+
 
 notifications:
   email: false
