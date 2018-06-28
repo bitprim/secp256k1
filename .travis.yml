@@ -6,11 +6,15 @@ env:
   - FOO=foo
   - FOO=bar
 
+install:
+  - ls -ltra
+
 script: echo $FOO
 
 jobs:
   include:
     - stage: deploy
+      install: ls
       script: echo Deploy
       # Keep in mind to overwrite these here
       rvm: 2.3
@@ -44,6 +48,8 @@ jobs:
 #   - /^release-\d+\.\d+\.\d+$/
 #   - /^feature-ci-.+$/
 #   - /^feature_ci_.+$/
+#   - /^feature-travis-.+$/
+#   - /^feature_travis_.+$/
 
 # linux: &linux
 #    os: linux
