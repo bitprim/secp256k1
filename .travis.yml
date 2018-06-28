@@ -66,14 +66,22 @@ script:
     echo "${TRAVIS_BRANCH}"
     if [[ "${TRAVIS_BRANCH}" = "dev" ]]; then
       export BITPRIM_CONAN_CHANNEL="testing"
+      export BITPRIM_FULL_BUILD=0
     elif  [[ "${TRAVIS_BRANCH}" = "release"* ]]; then
       export BITPRIM_CONAN_CHANNEL="stable"
+      export BITPRIM_FULL_BUILD=1
+    elif  [[ "${TRAVIS_BRANCH}" = "hotfix"* ]]; then
+      export BITPRIM_CONAN_CHANNEL="stable"
+      export BITPRIM_FULL_BUILD=1
     elif  [[ "${TRAVIS_BRANCH}" = "feature"* ]]; then
       export BITPRIM_CONAN_CHANNEL="${TRAVIS_BRANCH}"
+      export BITPRIM_FULL_BUILD=0
     else
       export BITPRIM_CONAN_CHANNEL="stable"
+      export BITPRIM_FULL_BUILD=1
     fi
     echo "${BITPRIM_CONAN_CHANNEL}"
+    echo "${BITPRIM_FULL_BUILD}"
 
     # if [ -e conan_channel ] then
     #   echo "Creating conan_channel file"
@@ -236,10 +244,16 @@ jobs:
       if: branch =~ /^(release|hotfix).+$/
 
 
-# Integration Tests ------------------------------------------------------
+# Push to repos ------------------------------------------------------
     - stage: integration tests
       install: skip
       script: echo "Running integration tests (Guille)"
+
+
+# # Integration Tests ------------------------------------------------------
+#     - stage: integration tests
+#       install: skip
+#       script: echo "Running integration tests (Guille)"
 
 
     # - stage: deploy to staging
