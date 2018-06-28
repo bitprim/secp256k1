@@ -115,7 +115,7 @@ jobs:
       python: "3.6"
       services:
         - docker
-      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_LOGIN_USERNAME="" CONAN_SKIP_CHECK_CREDENTIALS=True
+      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_UPLOAD="" 
            BITPRIM_RUN_TESTS=true
 
 # Builds ------------------------------------------------------
