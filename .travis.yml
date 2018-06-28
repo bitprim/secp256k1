@@ -167,14 +167,14 @@ jobs:
   include:
     - stage: checks
       install: skip
-      script: "Running checks (1)"
+      script: echo "Running checks (1)"
 
     - stage: unit tests
       install: skip
-      script: "Running unit tests (1)"
+      script: echo "Running unit tests (1)"
 
 
-    - stage: build binaries
+    - stage: build and upload binaries
       os: linux
       sudo: required
       language: python
@@ -183,7 +183,7 @@ jobs:
         - docker
       env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8
           BITPRIM_RUN_TESTS=true
-    # - stage: build binaries
+    # - stage: build and upload binaries
     #   os: osx
     #   sudo: required
     #   language: generic
@@ -197,6 +197,12 @@ jobs:
     # - stage: unit tests
     #   install: skip
     #   script: "Running unit tests (2)"
+
+    - stage: integration tests
+      install: skip
+      script: echo "Running integration tests (Guille)"
+
+
     - stage: deploy to staging
       install: skip
       script: skip
