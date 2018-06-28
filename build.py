@@ -23,8 +23,10 @@ if __name__ == "__main__":
                 # options["%s:with_benchmark" % name] = "True"
                 options["%s:with_tests" % name] = "True"
                 # options["%s:with_openssl_tests" % name] = "True"
+                marchs = ["x86_64"]
+            else:
+                marchs = ["x86_64", ''.join(cpuid.cpu_microarchitecture()), "haswell", "skylake", "skylake-avx512"]
 
-            marchs = ["x86_64", ''.join(cpuid.cpu_microarchitecture()), "haswell", "skylake", "skylake-avx512"]
             handle_microarchs("%s:microarchitecture" % name, marchs, filtered_builds, settings, options, env_vars, build_requires)
             # filtered_builds.append([settings, options, env_vars, build_requires])
 
