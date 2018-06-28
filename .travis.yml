@@ -38,6 +38,21 @@ osx: &osx
    os: osx
    language: generic
 
+jobs:
+  include:
+    - stage: unit tests
+      script: "Running unit tests (1)"
+    - stage: unit tests
+      script: "Running unit tests (2)"
+    - stage: deploy to staging
+      script: skip
+    - stage: test staging
+      script: 'curl http://sf-stages-staging.herokuapp.com'
+    - stage: deploy to production
+      script: skip
+    - stage: test production
+      script: 'curl http://sf-stages-production.herokuapp.com'
+
 matrix:
    include:
       # - <<: *linux
