@@ -212,33 +212,21 @@ jobs:
 
     # macOS, apple-Clang, libc++ -------------------------------------------------
     - stage: build and upload binaries
-      os: linux
-      sudo: required
-      language: python
-      python: "3.6"
-      services:
-        - docker
+      os: osx
+      language: generic
       osx_image: xcode9
       env: CONAN_APPLE_CLANG_VERSIONS=9.0 BITPRIM_RUN_TESTS=true
 
     - stage: build and upload binaries
-      os: linux
-      sudo: required
-      language: python
-      python: "3.6"
-      services:
-        - docker
+      os: osx
+      language: generic
       osx_image: xcode8.3         
       env: CONAN_APPLE_CLANG_VERSIONS=8.1
       if: branch =~ /^(release|hotfix).+$/
 
     - stage: build and upload binaries
-      os: linux
-      sudo: required
-      language: python
-      python: "3.6"
-      services:
-        - docker
+      os: osx
+      language: generic
       osx_image: xcode7.3
       env: CONAN_APPLE_CLANG_VERSIONS=7.3
       if: branch =~ /^(release|hotfix).+$/
