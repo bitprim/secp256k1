@@ -7,6 +7,10 @@ import cpuid
 from ci_utils.utils import get_builder, handle_microarchs
 
 if __name__ == "__main__":
+
+    # full_build_str = os.getenv('BITPRIM_FULL_BUILD', '0')
+    full_build = os.getenv('BITPRIM_FULL_BUILD', '0') == '1'
+
     builder, name = get_builder()
     builder.add_common_builds(shared_option_name="%s:shared" % name, pure_c=True)
 
@@ -24,7 +28,11 @@ if __name__ == "__main__":
                 # options["%s:with_openssl_tests" % name] = "True"
                 marchs = ["x86_64"]
             else:
-                marchs = ["x86_64", ''.join(cpuid.cpu_microarchitecture()), "haswell", "skylake", "skylake-avx512"]
+                if full_build:
+                    marchs = ["x86_64", ''.join(cpuid.cpu_microarchitecture()), "haswell", "skylake", "skylake-avx512"]
+                else:
+                    marchs = ["x86_64"]
+
 
             handle_microarchs("%s:microarchitecture" % name, marchs, filtered_builds, settings, options, env_vars, build_requires)
             # filtered_builds.append([settings, options, env_vars, build_requires])

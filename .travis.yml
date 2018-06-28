@@ -245,9 +245,9 @@ jobs:
 
 
 # Push to repos ------------------------------------------------------
-    - stage: integration tests
+    - stage: push to repos
       install: skip
-      script: echo "Running integration tests (Guille)"
+      script: echo "Running push to repos"
 
 
 # # Integration Tests ------------------------------------------------------
