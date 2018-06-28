@@ -41,14 +41,21 @@ osx: &osx
 jobs:
   include:
     - stage: build
-      os: linux
-      sudo: required
-      language: python
-      python: "3.6"
-      services:
-        - docker
-      env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8
-          BITPRIM_RUN_TESTS=true
+      include:
+        - os: linux
+          sudo: required
+          language: python
+          python: "3.6"
+          services:
+            - docker
+          env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8
+              BITPRIM_RUN_TESTS=true
+        - os: osx
+          sudo: required
+          language: generic
+          osx_image: xcode8.3
+          env: CONAN_APPLE_CLANG_VERSIONS=8.1
+
 
     - stage: unit tests
       script: "Running unit tests (1)"
