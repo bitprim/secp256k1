@@ -1,10 +1,6 @@
-# from conan.packager import ConanMultiPackager
-# import copy
-# import re
-# import platform
 import os
 import cpuid
-from ci_utils.utils import get_builder, handle_microarchs
+from ci_utils.utils import get_builder, handle_microarchs, copy_env_vars
 
 if __name__ == "__main__":
 
@@ -20,10 +16,11 @@ if __name__ == "__main__":
         if settings["build_type"] == "Release" \
                 and not("%s:shared"  % name in options and options["%s:shared" % name]):
 
-            env_vars["BITPRIM_BUILD_NUMBER"] = os.getenv('BITPRIM_BUILD_NUMBER', '-')
-            env_vars["BITPRIM_BRANCH"] = os.getenv('BITPRIM_BRANCH', '-')
-            env_vars["BITPRIM_CONAN_CHANNEL"] = os.getenv('BITPRIM_CONAN_CHANNEL', '-')
-            env_vars["BITPRIM_FULL_BUILD"] = os.getenv('BITPRIM_FULL_BUILD', '-')
+            # env_vars["BITPRIM_BUILD_NUMBER"] = os.getenv('BITPRIM_BUILD_NUMBER', '-')
+            # env_vars["BITPRIM_BRANCH"] = os.getenv('BITPRIM_BRANCH', '-')
+            # env_vars["BITPRIM_CONAN_CHANNEL"] = os.getenv('BITPRIM_CONAN_CHANNEL', '-')
+            # env_vars["BITPRIM_FULL_BUILD"] = os.getenv('BITPRIM_FULL_BUILD', '-')
+            copy_env_vars(env_vars)
 
             if os.getenv('BITPRIM_RUN_TESTS', 'false') == 'true':
                 # options["%s:with_benchmark" % name] = "True"
