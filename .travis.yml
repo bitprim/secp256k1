@@ -94,10 +94,15 @@ script:
         echo "nok"
     fi
 
-    if [ -e conan_version ] then
+    if [ ! -f conan_version ]; then
       echo "Creating conan_version file"
       printf "${BITPRIM_BUILD_NUMBER}" > conan_version
     fi
+
+    # if [ -e conan_version ] then
+    #   echo "Creating conan_version file"
+    #   printf "${BITPRIM_BUILD_NUMBER}" > conan_version
+    # fi
 
     # if [ -e conan_channel ] then
     #   echo "Creating conan_channel file"
