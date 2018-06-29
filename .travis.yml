@@ -86,6 +86,14 @@ script:
     fi
     # echo "${BITPRIM_CONAN_CHANNEL}"
     # echo "${BITPRIM_FULL_BUILD}"
+
+    if [ -e conan_version ]
+    then
+        echo "ok"
+    else
+        echo "nok"
+    fi
+
     if [ -e conan_version ] then
       echo "Creating conan_version file"
       printf "${BITPRIM_BUILD_NUMBER}" > conan_version
