@@ -235,6 +235,8 @@ class Secp256k1Conan(ConanFile):
         self.output.info("********************* BITPRIM_BRANCH      :  %s" % (os.getenv('BITPRIM_BRANCH', '-'),))
         self.output.info("********************* BITPRIM_CONAN_CHANNEL: %s" % (os.getenv('BITPRIM_CONAN_CHANNEL', '-'),))
         self.output.info("********************* BITPRIM_FULL_BUILD:    %s" % (os.getenv('BITPRIM_FULL_BUILD', '-'),))
+        self.output.info("********************* get_version():         %s" % (get_version(),))
+
 
 
         self.output.info("********************* self.channel: %s" % (self.channel,))
