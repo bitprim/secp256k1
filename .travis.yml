@@ -111,11 +111,11 @@ jobs:
 # Static Checks ------------------------------------------------------
     - stage: static checks
       install: skip
-      script:
-          - chmod +x .travis/push_other_repo.sh
-          - ./.travis/push_other_repo.sh
+      # script:
+      #     - chmod +x .travis/push_other_repo.sh
+      #     - ./.travis/push_other_repo.sh
 
-      # script: echo "Running checks (1)"
+      script: echo "Running checks (1)"
       # script:
       #   - export BITPRIM_BRANCH="${TRAVIS_BRANCH}"
       #   - git fetch --unshallow
@@ -251,7 +251,10 @@ jobs:
 # Push to repos ------------------------------------------------------
     - stage: push to repos
       install: skip
-      script: echo "Running push to repos"
+      # script: echo "Running push to repos"
+      script:
+          - chmod +x .travis/push_other_repo.sh
+          - ./.travis/push_other_repo.sh
 
 
 # # Integration Tests ------------------------------------------------------
