@@ -26,11 +26,13 @@ if __name__ == "__main__":
             # print(os.getenv('BITPRIM_CONAN_CHANNEL', '-'))
             # print(os.getenv('BITPRIM_FULL_BUILD', '-'))
 
-            env_vars["BITPRIM_BUILD_NUMBER"] = os.getenv('BITPRIM_BUILD_NUMBER', '-')
-            env_vars["BITPRIM_BRANCH"] = os.getenv('BITPRIM_BRANCH', '-')
-            env_vars["BITPRIM_CONAN_CHANNEL"] = os.getenv('BITPRIM_CONAN_CHANNEL', '-')
-            env_vars["BITPRIM_FULL_BUILD"] = os.getenv('BITPRIM_FULL_BUILD', '-')
-            # copy_env_vars(env_vars)
+
+            # env_vars["BITPRIM_BUILD_NUMBER"] = os.getenv('BITPRIM_BUILD_NUMBER', '-')
+            # env_vars["BITPRIM_BRANCH"] = os.getenv('BITPRIM_BRANCH', '-')
+            # env_vars["BITPRIM_CONAN_CHANNEL"] = os.getenv('BITPRIM_CONAN_CHANNEL', '-')
+            # env_vars["BITPRIM_FULL_BUILD"] = os.getenv('BITPRIM_FULL_BUILD', '-')
+            # env_vars["BITPRIM_CONAN_VERSION"] = os.getenv('BITPRIM_CONAN_VERSION', '-')
+            copy_env_vars(env_vars)
 
             # print(env_vars["BITPRIM_BUILD_NUMBER"])
             # print(env_vars["BITPRIM_BRANCH"])
