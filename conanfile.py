@@ -233,13 +233,12 @@ class Secp256k1Conan(ConanFile):
 
     def requirements(self):
 
-
         self.output.info("********************* BITPRIM_BUILD_NUMBER:  %s" % (os.getenv('BITPRIM_BUILD_NUMBER', '-'),))
         self.output.info("********************* BITPRIM_BRANCH      :  %s" % (os.getenv('BITPRIM_BRANCH', '-'),))
         self.output.info("********************* BITPRIM_CONAN_CHANNEL: %s" % (os.getenv('BITPRIM_CONAN_CHANNEL', '-'),))
         self.output.info("********************* BITPRIM_FULL_BUILD:    %s" % (os.getenv('BITPRIM_FULL_BUILD', '-'),))
+        self.output.info("********************* BITPRIM_CONAN_VERSION: %s" % (os.getenv('BITPRIM_CONAN_VERSION', '-'),))
         self.output.info("********************* get_version():         %s" % (get_version(),))
-
 
 
         self.output.info("********************* self.channel: %s" % (self.channel,))
