@@ -108,13 +108,13 @@ jobs:
 # Static Checks ------------------------------------------------------
     - stage: static checks
       install: skip
-      # script: echo "Running checks (1)"
-      script:
-        - export BITPRIM_BRANCH="${TRAVIS_BRANCH}"
-        - git fetch --unshallow
-        # - export BITPRIM_BUILD_NUMBER="$(git describe)"
-        - export BITPRIM_BUILD_NUMBER="$(python ci_utils/print_version.py)"
-        - echo "${BITPRIM_BUILD_NUMBER}"
+      script: echo "Running checks (1)"
+      # script:
+      #   - export BITPRIM_BRANCH="${TRAVIS_BRANCH}"
+      #   - git fetch --unshallow
+      #   # - export BITPRIM_BUILD_NUMBER="$(git describe)"
+      #   - export BITPRIM_BUILD_NUMBER="$(python ci_utils/print_version.py)"
+      #   - echo "${BITPRIM_BUILD_NUMBER}"
 
 # Unit Tests ------------------------------------------------------
     - stage: unit tests
