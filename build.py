@@ -21,10 +21,10 @@ if __name__ == "__main__":
         if settings["build_type"] == "Release" \
                 and not("%s:shared"  % name in options and options["%s:shared" % name]):
 
-            print(os.getenv('BITPRIM_BUILD_NUMBER', '-'))
-            print(os.getenv('BITPRIM_BRANCH', '-'))
-            print(os.getenv('BITPRIM_CONAN_CHANNEL', '-'))
-            print(os.getenv('BITPRIM_FULL_BUILD', '-'))
+            # print(os.getenv('BITPRIM_BUILD_NUMBER', '-'))
+            # print(os.getenv('BITPRIM_BRANCH', '-'))
+            # print(os.getenv('BITPRIM_CONAN_CHANNEL', '-'))
+            # print(os.getenv('BITPRIM_FULL_BUILD', '-'))
 
             env_vars["BITPRIM_BUILD_NUMBER"] = os.getenv('BITPRIM_BUILD_NUMBER', '-')
             env_vars["BITPRIM_BRANCH"] = os.getenv('BITPRIM_BRANCH', '-')
@@ -32,10 +32,10 @@ if __name__ == "__main__":
             env_vars["BITPRIM_FULL_BUILD"] = os.getenv('BITPRIM_FULL_BUILD', '-')
             # copy_env_vars(env_vars)
 
-            print(env_vars["BITPRIM_BUILD_NUMBER"])
-            print(env_vars["BITPRIM_BRANCH"])
-            print(env_vars["BITPRIM_CONAN_CHANNEL"])
-            print(env_vars["BITPRIM_FULL_BUILD"])
+            # print(env_vars["BITPRIM_BUILD_NUMBER"])
+            # print(env_vars["BITPRIM_BRANCH"])
+            # print(env_vars["BITPRIM_CONAN_CHANNEL"])
+            # print(env_vars["BITPRIM_FULL_BUILD"])
 
 
             if os.getenv('BITPRIM_RUN_TESTS', 'false') == 'true':
