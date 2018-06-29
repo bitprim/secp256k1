@@ -87,28 +87,10 @@ script:
     # echo "${BITPRIM_CONAN_CHANNEL}"
     # echo "${BITPRIM_FULL_BUILD}"
 
-    if [ -e conan_version ]
-    then
-        echo "ok"
-    else
-        echo "nok"
-    fi
-
     if [ ! -f conan_version ]; then
       echo "Creating conan_version file"
       printf "${BITPRIM_BUILD_NUMBER}" > conan_version
     fi
-
-    # if [ -e conan_version ] then
-    #   echo "Creating conan_version file"
-    #   printf "${BITPRIM_BUILD_NUMBER}" > conan_version
-    # fi
-
-    # if [ -e conan_channel ] then
-    #   echo "Creating conan_channel file"
-    #   printf "${BITPRIM_CONAN_CHANNEL}" > conan_channel
-    # fi
-
 
 
   - |
