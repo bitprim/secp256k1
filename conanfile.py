@@ -26,9 +26,9 @@ from ci_utils.utils import option_on_off, get_version, get_conan_req_version, ge
 class Secp256k1Conan(ConanFile):
     name = "secp256k1"
     
-    version = "0.4.0"
-    # version = get_version()
-    myversion = get_version()
+    version = get_version()
+    # version = "0.4.0"
+    # myversion = get_version()
 
     license = "http://www.boost.org/users/license.html"
     url = "https://github.com/bitprim/secp256k1"
@@ -233,16 +233,14 @@ class Secp256k1Conan(ConanFile):
         
 
     def requirements(self):
+        # self.output.info("********************* BITPRIM_BUILD_NUMBER:  %s" % (os.getenv('BITPRIM_BUILD_NUMBER', '-'),))
+        # self.output.info("********************* BITPRIM_BRANCH      :  %s" % (os.getenv('BITPRIM_BRANCH', '-'),))
+        # self.output.info("********************* BITPRIM_CONAN_CHANNEL: %s" % (os.getenv('BITPRIM_CONAN_CHANNEL', '-'),))
+        # self.output.info("********************* BITPRIM_FULL_BUILD:    %s" % (os.getenv('BITPRIM_FULL_BUILD', '-'),))
+        # self.output.info("********************* BITPRIM_CONAN_VERSION: %s" % (os.getenv('BITPRIM_CONAN_VERSION', '-'),))
+        # self.output.info("********************* get_version():         %s" % (get_version(),))
+        # self.output.info("********************* self.channel: %s" % (self.channel,))
 
-        self.output.info("********************* BITPRIM_BUILD_NUMBER:  %s" % (os.getenv('BITPRIM_BUILD_NUMBER', '-'),))
-        self.output.info("********************* BITPRIM_BRANCH      :  %s" % (os.getenv('BITPRIM_BRANCH', '-'),))
-        self.output.info("********************* BITPRIM_CONAN_CHANNEL: %s" % (os.getenv('BITPRIM_CONAN_CHANNEL', '-'),))
-        self.output.info("********************* BITPRIM_FULL_BUILD:    %s" % (os.getenv('BITPRIM_FULL_BUILD', '-'),))
-        self.output.info("********************* BITPRIM_CONAN_VERSION: %s" % (os.getenv('BITPRIM_CONAN_VERSION', '-'),))
-        self.output.info("********************* get_version():         %s" % (get_version(),))
-
-
-        self.output.info("********************* self.channel: %s" % (self.channel,))
         # self.requires("Say/0.1@%s/%s" % (self.user, self.channel))
 
         if self.options.with_bignum_lib:
