@@ -21,6 +21,9 @@ if __name__ == "__main__":
                 and not("%s:shared"  % name in options and options["%s:shared" % name]):
 
             env_vars["BITPRIM_BUILD_NUMBER"] = os.getenv('BITPRIM_BUILD_NUMBER', '-')
+            env_vars["BITPRIM_BRANCH"] = os.getenv('BITPRIM_BRANCH', '-')
+            env_vars["BITPRIM_CONAN_CHANNEL"] = os.getenv('BITPRIM_CONAN_CHANNEL', '-')
+            env_vars["BITPRIM_FULL_BUILD"] = os.getenv('BITPRIM_FULL_BUILD', '-')
 
             if os.getenv('BITPRIM_RUN_TESTS', 'false') == 'true':
                 # options["%s:with_benchmark" % name] = "True"
