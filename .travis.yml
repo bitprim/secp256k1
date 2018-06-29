@@ -62,6 +62,8 @@ script:
   - export BITPRIM_BUILD_NUMBER="$(git describe)"
   - echo "${BITPRIM_BUILD_NUMBER}"
 
+  - export BITPRIM_BRANCH="${TRAVIS_BRANCH}"
+
   - |
     echo "${TRAVIS_BRANCH}"
     if [[ "${TRAVIS_BRANCH}" = "dev" ]]; then
