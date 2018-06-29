@@ -58,12 +58,16 @@ install:
     fi    
 
 script:
+
+  - git rev-parse --abbrev-ref HEAD
+
   - export BITPRIM_BRANCH="${TRAVIS_BRANCH}"
   - git fetch --unshallow
   # - export BITPRIM_BUILD_NUMBER="$(git describe)"
   - export BITPRIM_BUILD_NUMBER="$(python ci_utils/print_version.py)"
   - echo "${BITPRIM_BUILD_NUMBER}"
 
+  - git rev-parse --abbrev-ref HEAD
 
   - |
     echo "${TRAVIS_BRANCH}"
