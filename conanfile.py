@@ -25,11 +25,7 @@ from ci_utils.utils import option_on_off, get_version, get_conan_req_version, ge
 
 class Secp256k1Conan(ConanFile):
     name = "secp256k1"
-    
     version = get_version()
-    # version = "0.4.0"
-    # myversion = get_version()
-
     license = "http://www.boost.org/users/license.html"
     url = "https://github.com/bitprim/secp256k1"
     description = "Optimized C library for EC operations on curve secp256k1"
