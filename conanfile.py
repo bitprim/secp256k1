@@ -202,15 +202,15 @@ class Secp256k1Conan(ConanFile):
                             # sys.exit
                     else:
                         if len(close) > 0:
-                            fixed_march = get_march(close[0], str(self.settings.compiler), float(str(self.settings.compiler.version)))
+                            fixed_march = get_march(close[0], str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version)))
                         else:
-                            fixed_march = get_march(self.options.microarchitecture, str(self.settings.compiler), float(str(self.settings.compiler.version)))
+                            fixed_march = get_march(self.options.microarchitecture, str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version)))
 
                         self.output.warn("Microarchitecture '%s' is not recognized, but it will be automatically fixed to '%s'." % (self.options.microarchitecture, fixed_march))
                         self.options.microarchitecture = fixed_march
 
-                if not march_exists_in(self.options.microarchitecture, str(self.settings.compiler), float(str(self.settings.compiler.version))):
-                    fixed_march = get_march(self.options.microarchitecture, str(self.settings.compiler), float(str(self.settings.compiler.version)))
+                if not march_exists_in(self.options.microarchitecture, str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version))):
+                    fixed_march = get_march(self.options.microarchitecture, str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version)))
                     if not self.options.fix_march:
                         raise Exception ("Microarchitecture '%s' is not supported by your compiler, you could use '%s'." % (self.options.microarchitecture,fixed_march))
                         # self.output.error("Microarchitecture '%s' is not supported by your compiler, you could use '%s'." % (self.options.microarchitecture,fixed_march))
@@ -219,7 +219,7 @@ class Secp256k1Conan(ConanFile):
                         self.output.warn("Microarchitecture '%s' is not supported by your compiler, but it will be automatically fixed to '%s'." % (self.options.microarchitecture, fixed_march))
 
 
-            fixed_march = get_march(self.options.microarchitecture, str(self.settings.compiler), float(str(self.settings.compiler.version)))
+            fixed_march = get_march(self.options.microarchitecture, str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version)))
     
             if march_from != 'user defined':
                 self.output.info("Compiling for microarchitecture (%s): %s" % (march_from, self.options.microarchitecture))
