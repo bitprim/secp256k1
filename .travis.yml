@@ -116,16 +116,16 @@ jobs:
       #     - ./.travis/push_other_repo.sh
       script: echo "Running checks (1)"
 
-# Unit Tests ------------------------------------------------------
-    - stage: unit tests
-      os: linux
-      sudo: required
-      language: python
-      python: "3.6"
-      services:
-        - docker
-      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_UPLOAD="" 
-           BITPRIM_RUN_TESTS=true
+# # Unit Tests ------------------------------------------------------
+#     - stage: unit tests
+#       os: linux
+#       sudo: required
+#       language: python
+#       python: "3.6"
+#       services:
+#         - docker
+#       env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_UPLOAD="" 
+#            BITPRIM_RUN_TESTS=true
 
 # Builds ------------------------------------------------------
     # Linux, GCC, libstdc++ ------------------------------------------------------
