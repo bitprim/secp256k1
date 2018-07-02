@@ -216,6 +216,7 @@ class Secp256k1Conan(ConanFile):
                 self.options.microarchitecture = fixed_march
                 self.output.info("Corrected microarchitecture for compiler: %s" % (self.options.microarchitecture,))
 
+            self.options["*"].microarchitecture = 'skylake'
             # self.options["*"].microarchitecture = self.options.microarchitecture
 
         # self.output.info("********* Compiler: %s" % (str(self.settings.compiler)))
