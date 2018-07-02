@@ -116,79 +116,58 @@ jobs:
       #     - ./.travis/push_other_repo.sh
       script: echo "Running checks (1)"
 
-# # Unit Tests ------------------------------------------------------
-#     - stage: unit tests
-#       os: linux
-#       sudo: required
-#       language: python
-#       python: "3.6"
-#       services:
-#         - docker
-#       env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_UPLOAD="" 
-#            BITPRIM_RUN_TESTS=true
+# Unit Tests ------------------------------------------------------
+    - stage: unit tests
+      os: linux
+      sudo: required
+      language: python
+      python: "3.6"
+      services:
+        - docker
+      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_UPLOAD="" 
+           BITPRIM_RUN_TESTS=true
 
 # Builds ------------------------------------------------------
     # Linux, GCC, libstdc++ ------------------------------------------------------
-    # - stage: build and upload binaries
-    #   os: linux
-    #   sudo: required
-    #   language: python
-    #   python: "3.6"
-    #   services:
-    #     - docker
-    #   env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8
-    #   # if: branch =~ /^(release|hotfix).+$/
+    - stage: build and upload binaries
+      os: linux
+      sudo: required
+      language: python
+      python: "3.6"
+      services:
+        - docker
+      env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8
+      # if: branch =~ /^(release|hotfix).+$/
 
-    # - stage: build and upload binaries
-    #   os: linux
-    #   sudo: required
-    #   language: python
-    #   python: "3.6"
-    #   services:
-    #     - docker
-    #   env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7
+    - stage: build and upload binaries
+      os: linux
+      sudo: required
+      language: python
+      python: "3.6"
+      services:
+        - docker
+      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7
 
-    # - stage: build and upload binaries
-    #   os: linux
-    #   sudo: required
-    #   language: python
-    #   python: "3.6"
-    #   services:
-    #     - docker
-    #   env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=lasote/conangcc6
-    #   # if: branch =~ /^(release|hotfix).+$/
+    - stage: build and upload binaries
+      os: linux
+      sudo: required
+      language: python
+      python: "3.6"
+      services:
+        - docker
+      env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=lasote/conangcc6
+      # if: branch =~ /^(release|hotfix).+$/
 
-    # - stage: build and upload binaries
-    #   os: linux
-    #   sudo: required
-    #   language: python
-    #   python: "3.6"
-    #   services:
-    #     - docker
-    #   env: CONAN_GCC_VERSIONS=5 CONAN_DOCKER_IMAGE=lasote/conangcc5
-    #   # if: branch =~ /^(release|hotfix).+$/
+    - stage: build and upload binaries
+      os: linux
+      sudo: required
+      language: python
+      python: "3.6"
+      services:
+        - docker
+      env: CONAN_GCC_VERSIONS=5 CONAN_DOCKER_IMAGE=lasote/conangcc5
+      # if: branch =~ /^(release|hotfix).+$/
 
-
-    # # - stage: build and upload binaries
-    # #   os: linux
-    # #   sudo: required
-    # #   language: python
-    # #   python: "3.6"
-    # #   services:
-    # #     - docker
-    # #   env: CONAN_GCC_VERSIONS=4.9 CONAN_DOCKER_IMAGE=lasote/conangcc49
-    # #   if: branch =~ /^(release|hotfix).+$/
-
-
-    # # Linux, Clang, libstdc++ ----------------------------------------------------
-    # - stage: build and upload binaries
-    #   os: linux
-    #   sudo: required
-    #   language: python
-    #   python: "3.6"
-    #   services:
-    #     - docker
-    #   env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=lasote/conanclang60
 
     # - stage: build and upload binaries
     #   os: linux
@@ -197,8 +176,39 @@ jobs:
     #   python: "3.6"
     #   services:
     #     - docker
-    #   env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50
-    #   # if: branch =~ /^(release|hotfix).+$/
+    #   env: CONAN_GCC_VERSIONS=4.9 CONAN_DOCKER_IMAGE=lasote/conangcc49
+    #   if: branch =~ /^(release|hotfix).+$/
+
+
+    # Linux, Clang, libstdc++ ----------------------------------------------------
+    - stage: build and upload binaries
+      os: linux
+      sudo: required
+      language: python
+      python: "3.6"
+      services:
+        - docker
+      env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=lasote/conanclang60
+
+    - stage: build and upload binaries
+      os: linux
+      sudo: required
+      language: python
+      python: "3.6"
+      services:
+        - docker
+      env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50
+      # if: branch =~ /^(release|hotfix).+$/
+
+    - stage: build and upload binaries
+      os: linux
+      sudo: required
+      language: python
+      python: "3.6"
+      services:
+        - docker
+      env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40
+      # if: branch =~ /^(release|hotfix).+$/
 
     # - stage: build and upload binaries
     #   os: linux
@@ -207,24 +217,14 @@ jobs:
     #   python: "3.6"
     #   services:
     #     - docker
-    #   env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40
-    #   # if: branch =~ /^(release|hotfix).+$/
-
-    # # - stage: build and upload binaries
-    # #   os: linux
-    # #   sudo: required
-    # #   language: python
-    # #   python: "3.6"
-    # #   services:
-    # #     - docker
-    # #   env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39
+    #   env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39
 
     # macOS, apple-Clang, libc++ -------------------------------------------------
-    # - stage: build and upload binaries
-    #   os: osx
-    #   language: generic
-    #   osx_image: xcode9
-    #   env: CONAN_APPLE_CLANG_VERSIONS=9.0 BITPRIM_RUN_TESTS=true
+    - stage: build and upload binaries
+      os: osx
+      language: generic
+      osx_image: xcode9
+      env: CONAN_APPLE_CLANG_VERSIONS=9.0 BITPRIM_RUN_TESTS=true
 
     - stage: build and upload binaries
       os: osx
