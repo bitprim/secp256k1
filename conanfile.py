@@ -151,6 +151,8 @@ class Secp256k1Conan(ConanFile):
                 self.requires("gmp/6.1.2@bitprim/stable")
 
     def config_options(self):
+        self.output.error("******************************* config_options(self) - self.options.microarchitecture: %s" % (self.options.microarchitecture,))
+        if self.options.microarchitecture == "_DUMMY_":
         if self.settings.arch != "x86_64":
             self.output.info("microarchitecture is disabled for architectures other than x86_64, your architecture: %s" % (self.settings.arch,))
             self.options.remove("microarchitecture")
