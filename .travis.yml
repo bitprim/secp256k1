@@ -114,14 +114,7 @@ jobs:
       # script:
       #     - chmod +x .travis/push_other_repo.sh
       #     - ./.travis/push_other_repo.sh
-
       script: echo "Running checks (1)"
-      # script:
-      #   - export BITPRIM_BRANCH="${TRAVIS_BRANCH}"
-      #   - git fetch --unshallow
-      #   # - export BITPRIM_BUILD_NUMBER="$(git describe)"
-      #   - export BITPRIM_BUILD_NUMBER="$(python ci_utils/print_version.py)"
-      #   - echo "${BITPRIM_BUILD_NUMBER}"
 
 # Unit Tests ------------------------------------------------------
     - stage: unit tests
@@ -251,10 +244,10 @@ jobs:
 # Push to repos ------------------------------------------------------
     - stage: push to repos
       install: skip
-      # script: echo "Running push to repos"
       script:
           - chmod +x .travis/push_other_repo.sh
           - ./.travis/push_other_repo.sh
+      if: branch =~ /^(dev|feature).+$/
 
 
 # # Integration Tests ------------------------------------------------------
