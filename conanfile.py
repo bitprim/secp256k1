@@ -212,9 +212,11 @@ class Secp256k1Conan(ConanFile):
             if march_from != 'user defined':
                 self.output.info("Compiling for microarchitecture (%s): %s" % (march_from, self.options.microarchitecture))
 
-            self.options.microarchitecture = fixed_march
-            self.options["*"].microarchitecture = self.options.microarchitecture
-            self.output.info("Corrected microarchitecture for compiler: %s" % (self.options.microarchitecture,))
+            if self.options.microarchitecture != fixed_march:
+                self.options.microarchitecture = fixed_march
+                self.output.info("Corrected microarchitecture for compiler: %s" % (self.options.microarchitecture,))
+
+            # self.options["*"].microarchitecture = self.options.microarchitecture
 
         # self.output.info("********* Compiler: %s" % (str(self.settings.compiler)))
         # self.output.info("********* Compiler Version: %s" % (str(self.settings.compiler.version)))
