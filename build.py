@@ -15,8 +15,8 @@ if __name__ == "__main__":
     filtered_builds = []
     for settings, options, env_vars, build_requires, reference in builder.items:
         
-        # print(settings)
-        # print(options)
+        print(settings)
+        print(options)
         # print(settings["compiler"])
         # print(settings["compiler.version"])
 
