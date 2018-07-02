@@ -1,6 +1,7 @@
 import os
 import cpuid
 from ci_utils.utils import get_builder, handle_microarchs, copy_env_vars
+from ci_utils.marchs import marchs_compiler_list
 
 if __name__ == "__main__":
 
@@ -13,6 +14,13 @@ if __name__ == "__main__":
 
     filtered_builds = []
     for settings, options, env_vars, build_requires, reference in builder.items:
+        
+        print(settings)
+        print(options)
+
+        print(settings["compiler"])
+        print(settings["compiler.version"])
+
 
         if settings["build_type"] == "Release" \
                 and not("%s:shared"  % name in options and options["%s:shared" % name]):
@@ -27,7 +35,9 @@ if __name__ == "__main__":
             else:
                 if full_build:
                     # marchs = ["x86-64", ''.join(cpuid.cpu_microarchitecture()), "haswell", "skylake", "skylake-avx512"]
-                    marchs = [''.join(cpuid.cpu_microarchitecture()), 'znver1', 'silvermont', 'westmere', 'goldmont', 'btver1', 'icelake-client', 'btver2', 'skylake', 'nano', 'haswell', 'nano-1000', 'broadwell', 'bdver1', 'bdver3', 'bdver2', 'bdver4', 'core2', 'k8', 'amdfam10', 'icelake-server', 'bonnell', 'cannonlake', 'k8-sse3', 'goldmont-plus', 'nano-x4', 'nehalem', 'ivybridge', 'eden-x4', 'x86-64', 'nano-3000', 'knl', 'knm', 'penryn', 'eden-x2', 'sandybridge', 'nano-2000', 'tremont', 'skylake-avx512', 'nano-x2']
+                    # marchs = [''.join(cpuid.cpu_microarchitecture()), 'znver1', 'silvermont', 'westmere', 'goldmont', 'btver1', 'icelake-client', 'btver2', 'skylake', 'nano', 'haswell', 'nano-1000', 'broadwell', 'bdver1', 'bdver3', 'bdver2', 'bdver4', 'core2', 'k8', 'amdfam10', 'icelake-server', 'bonnell', 'cannonlake', 'k8-sse3', 'goldmont-plus', 'nano-x4', 'nehalem', 'ivybridge', 'eden-x4', 'x86-64', 'nano-3000', 'knl', 'knm', 'penryn', 'eden-x2', 'sandybridge', 'nano-2000', 'tremont', 'skylake-avx512', 'nano-x2']
+                    marchs = marchs_compiler_list(str(settings["compiler"]), float(str(settings["compiler.version"])))
+                    marchs.append(''.join(cpuid.cpu_microarchitecture())
                 else:
                     marchs = ["x86-64"]
 

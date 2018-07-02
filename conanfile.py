@@ -24,6 +24,7 @@ from conans import __version__ as conan_version
 from conans.model.version import Version
 from ci_utils.utils import option_on_off, get_version, get_conan_req_version, get_cpu_microarchitecture, get_cpuid
 from ci_utils.marchs import get_march, march_exists_in, march_exists_full, march_close_name, marchs_full_list
+from ci_utils.marchs import marchs_compiler_list
 
 class Secp256k1Conan(ConanFile):
     name = "secp256k1"
@@ -162,6 +163,9 @@ class Secp256k1Conan(ConanFile):
 
     def configure(self):
         del self.settings.compiler.libcxx       #Pure-C Library
+
+        # xxxx = marchs_compiler_list(str(self.settings.compiler), float(str(self.settings.compiler.version)))
+        # print(xxxx)
 
         if self.settings.arch == "x86_64":
             if self.options.microarchitecture == "_DUMMY_":
