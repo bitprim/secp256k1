@@ -23,7 +23,8 @@ from conans import ConanFile, CMake
 from conans import __version__ as conan_version
 from conans.model.version import Version
 from ci_utils.utils import option_on_off, get_version, get_conan_req_version, get_cpu_microarchitecture, get_cpuid
-from ci_utils.marchs import get_march, march_exists_in, march_exists_full, march_close_name, marchs_full_list, msvc_to_ext
+from ci_utils.marchs import get_march, march_exists_in, march_exists_full, march_close_name, msvc_to_ext
+# , marchs_full_list
 
 class Secp256k1Conan(ConanFile):
     name = "secp256k1"
@@ -170,10 +171,8 @@ class Secp256k1Conan(ConanFile):
         if self.settings.arch == "x86_64" and self.options.microarchitecture == "_DUMMY_":
             del self.options.fix_march
             # self.options.remove("fix_march")
+            raise Exception ("fix_march option is for using together with microarchitecture option.")
 
-
-        # xxxx = marchs_compiler_list(str(self.settings.compiler), float(str(self.settings.compiler.version)))
-        # print(xxxx)
 
         if self.settings.arch == "x86_64":
             if self.options.microarchitecture == "_DUMMY_":
@@ -228,47 +227,8 @@ class Secp256k1Conan(ConanFile):
                 self.options.microarchitecture = fixed_march
                 self.output.info("Corrected microarchitecture for compiler: %s" % (self.options.microarchitecture,))
 
-            self.options["*"].microarchitecture = 'skylake'
-            # self.options["*"].microarchitecture = self.options.microarchitecture
-
-        # self.output.info("********* Compiler: %s" % (str(self.settings.compiler)))
-        # self.output.info("********* Compiler Version: %s" % (str(self.settings.compiler.version)))
-
-        # if self.settings.compiler.version == 9.1:
-        #     self.output.info("************************************ IF")
-        # else:
-        #     self.output.info("************************************ ELSE")
-
-
-        # # MinGW
-        # if self.options.microarchitecture == 'skylake-avx512' and self.settings.os == "Windows" and self.settings.compiler == "gcc":
-        #     self.output.info("'skylake-avx512' microarchitecture is not supported by this compiler, fall back to 'skylake'")
-        #     self.options.microarchitecture = 'skylake'
-
-        # # if self.options.microarchitecture == 'skylake' and self.settings.os == "Windows" and self.settings.compiler == "gcc":
-        # #     self.output.info("'skylake' microarchitecture is not supported by this compiler, fall back to 'haswell'")
-        # #     self.options.microarchitecture = 'haswell'
-
-        # if self.options.microarchitecture == 'skylake-avx512' and self.settings.compiler == "apple-clang" and float(str(self.settings.compiler.version)) < 8:
-        #     self.output.info("'skylake-avx512' microarchitecture is not supported by this compiler, fall back to 'skylake'")
-        #     self.options.microarchitecture = 'skylake'
-
-        # if self.options.microarchitecture == 'skylake' and self.settings.compiler == "apple-clang" and float(str(self.settings.compiler.version)) < 8:
-        #     self.output.info("'skylake' microarchitecture is not supported by this compiler, fall back to 'haswell'")
-        #     self.options.microarchitecture = 'haswell'
-
-        # if self.options.microarchitecture == 'skylake-avx512' and self.settings.compiler == "gcc" and float(str(self.settings.compiler.version)) < 6:
-        #     self.output.info("'skylake-avx512' microarchitecture is not supported by this compiler, fall back to 'skylake'")
-        #     self.options.microarchitecture = 'skylake'
-
-        # if self.options.microarchitecture == 'skylake' and self.settings.compiler == "gcc" and float(str(self.settings.compiler.version)) < 6:
-        #     self.output.info("'skylake' microarchitecture is not supported by this compiler, fall back to 'haswell'")
-        #     self.options.microarchitecture = 'haswell'
-
-        # # if self.options.microarchitecture == 'skylake-avx512' and self.settings.compiler == "gcc" and float(str(self.settings.compiler.version)) < 5:
-        # #     self.options.microarchitecture = 'haswell'
-
-        
+            # self.options["*"].microarchitecture = 'skylake'
+            self.options["*"].microarchitecture = self.options.microarchitecture
 
     def package_id(self):
         self.info.options.with_benchmark = "ANY"

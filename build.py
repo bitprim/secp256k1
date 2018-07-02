@@ -1,26 +1,17 @@
 import os
 import cpuid
-from ci_utils.utils import get_builder, handle_microarchs, copy_env_vars
-from ci_utils.marchs import filter_valid_exts #marchs_compiler_list
 import platform
+from ci_utils.utils import get_builder, handle_microarchs, copy_env_vars
+from ci_utils.marchs import filter_valid_exts
 
 if __name__ == "__main__":
 
-    # full_build_str = os.getenv('BITPRIM_FULL_BUILD', '0')
-    # full_build = os.getenv('BITPRIM_FULL_BUILD', '0') == '1'
-    full_build = True
-
+    full_build = os.getenv('BITPRIM_FULL_BUILD', '0') == '1'
     builder, name = get_builder()
     builder.add_common_builds(shared_option_name="%s:shared" % name, pure_c=True)
 
     filtered_builds = []
     for settings, options, env_vars, build_requires, reference in builder.items:
-        
-        # print(settings)
-        # print(options)
-        # print(settings["compiler"])
-        # print(settings["compiler.version"])
-
 
         if settings["build_type"] == "Release" \
                 and not("%s:shared"  % name in options and options["%s:shared" % name]):
@@ -40,7 +31,6 @@ if __name__ == "__main__":
                     # marchs.append(''.join(cpuid.cpu_microarchitecture()))
 
                     marchs = filter_valid_exts(str(platform.system()), str(settings["compiler"]), float(str(settings["compiler.version"])), [''.join(cpuid.cpu_microarchitecture()), 'x86-64', 'sandybridge', 'ivybridge', 'haswell', 'skylake', 'skylake-avx512'])
-                    print(marchs)
                 else:
                     marchs = ["x86-64"]
 
