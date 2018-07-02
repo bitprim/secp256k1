@@ -335,7 +335,7 @@ class Secp256k1Conan(ConanFile):
             cmake.definitions["CONAN_C_FLAGS"] = cmake.definitions.get("CONAN_C_FLAGS", "") + " -march=" + gcc_march
         else:
             ext = msvc_to_ext(str(self.options.microarchitecture))
-            if ext not is None:
+            if ext is not None:
                 cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " /arch:" + ext
                 cmake.definitions["CONAN_C_FLAGS"] = cmake.definitions.get("CONAN_C_FLAGS", "") + " /arch:" + ext
 
