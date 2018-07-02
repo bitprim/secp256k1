@@ -220,8 +220,10 @@ class Secp256k1Conan(ConanFile):
 
             fixed_march = get_march(self.options.microarchitecture, str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version)))
     
-            if march_from != 'user defined':
-                self.output.info("Compiling for microarchitecture (%s): %s" % (march_from, self.options.microarchitecture))
+            if march_from == 'user defined':
+                self.output.info("Provided microarchitecture (%s): %s" % (march_from, self.options.microarchitecture))
+            else:
+                self.output.info("Detected microarchitecture (%s): %s" % (march_from, self.options.microarchitecture))
 
             if self.options.microarchitecture != fixed_march:
                 self.options.microarchitecture = fixed_march
@@ -303,9 +305,13 @@ class Secp256k1Conan(ConanFile):
             cmake.definitions["CONAN_C_FLAGS"] = cmake.definitions.get("CONAN_C_FLAGS", "") + " -march=" + gcc_march
         else:
             ext = msvc_to_ext(str(self.options.microarchitecture))
+
             if ext is not None:
+                self.output.info("*********************** ext: %s" % (ext,))
                 cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " /arch:" + ext
                 cmake.definitions["CONAN_C_FLAGS"] = cmake.definitions.get("CONAN_C_FLAGS", "") + " /arch:" + ext
+            else:
+                self.output.info("*********************** ext is None")
 
         # microarchitecture_default
 
