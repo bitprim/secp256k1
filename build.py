@@ -6,8 +6,8 @@ from ci_utils.marchs import filter_valid_exts
 
 if __name__ == "__main__":
 
-    # full_build = os.getenv('BITPRIM_FULL_BUILD', '0') == '1'
-    full_build = True
+    full_build = os.getenv('BITPRIM_FULL_BUILD', '0') == '1'
+    # full_build = True
 
     builder, name = get_builder()
     builder.add_common_builds(shared_option_name="%s:shared" % name, pure_c=True)
