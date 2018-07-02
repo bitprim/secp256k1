@@ -22,8 +22,9 @@ cmake_minimum_required(VERSION 3.4)
 # secp256k1
 #==============================================================================
 project(secp256k1
-  VERSION 0.4.0
+  VERSION 0
   LANGUAGES C)
+  # VERSION 0.4.0
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
