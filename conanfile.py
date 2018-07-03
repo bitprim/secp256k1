@@ -22,17 +22,12 @@ import os
 from conans import ConanFile, CMake
 from conans import __version__ as conan_version
 from conans.model.version import Version
-from ci_utils.utils import option_on_off, get_version, get_conan_req_version, get_cpu_microarchitecture, get_cpuid
-from ci_utils.marchs import get_march, march_exists_in, march_exists_full, march_close_name, msvc_to_ext
-# , marchs_full_list
+from ci_utils.utils import option_on_off, get_version, get_conan_req_version, march_conan_manip, pass_march_to_compiler
 
 class Secp256k1Conan(ConanFile):
     name = "secp256k1"
     
     version = get_version()
-    # version = "0.4.0"
-    # myversion = get_version()
-
     license = "http://www.boost.org/users/license.html"
     url = "https://github.com/bitprim/secp256k1"
     description = "Optimized C library for EC operations on curve secp256k1"
@@ -138,16 +133,6 @@ class Secp256k1Conan(ConanFile):
         
 
     def requirements(self):
-        # self.output.info("********************* BITPRIM_BUILD_NUMBER:  %s" % (os.getenv('BITPRIM_BUILD_NUMBER', '-'),))
-        # self.output.info("********************* BITPRIM_BRANCH      :  %s" % (os.getenv('BITPRIM_BRANCH', '-'),))
-        # self.output.info("********************* BITPRIM_CONAN_CHANNEL: %s" % (os.getenv('BITPRIM_CONAN_CHANNEL', '-'),))
-        # self.output.info("********************* BITPRIM_FULL_BUILD:    %s" % (os.getenv('BITPRIM_FULL_BUILD', '-'),))
-        # self.output.info("********************* BITPRIM_CONAN_VERSION: %s" % (os.getenv('BITPRIM_CONAN_VERSION', '-'),))
-        # self.output.info("********************* get_version():         %s" % (get_version(),))
-        # self.output.info("********************* self.channel: %s" % (self.channel,))
-
-        # self.requires("Say/0.1@%s/%s" % (self.user, self.channel))
-
         if self.options.with_bignum_lib:
             if self.settings.os == "Windows":
                 self.requires("mpir/3.0.0@bitprim/stable")
@@ -155,14 +140,10 @@ class Secp256k1Conan(ConanFile):
                 self.requires("gmp/6.1.2@bitprim/stable")
 
     def config_options(self):
-        # self.output.error("******************************* config_options(self) - self.options.microarchitecture: %s" % (self.options.microarchitecture,))
         if self.settings.arch != "x86_64":
             self.output.info("microarchitecture is disabled for architectures other than x86_64, your architecture: %s" % (self.settings.arch,))
             self.options.remove("microarchitecture")
             self.options.remove("fix_march")
-        # else:
-        #     if self.options.microarchitecture == "_DUMMY_":
-        #         self.options.remove("fix_march")
 
         if self.settings.compiler == "Visual Studio":
             self.options.remove("fPIC")
@@ -177,63 +158,8 @@ class Secp256k1Conan(ConanFile):
             # self.options.remove("fix_march")
             raise Exception ("fix_march option is for using together with microarchitecture option.")
 
-
         if self.settings.arch == "x86_64":
-            if self.options.microarchitecture == "_DUMMY_":
-                self.options.microarchitecture = get_cpu_microarchitecture().replace('_', '-')
-                if get_cpuid() == None:
-                    march_from = 'default'
-                else:
-                    march_from = 'taken from cpuid'
-            else:
-                march_from = 'user defined'
-
-                # self.output.error("%s" % (marchs_full_list(),))
-
-                if not march_exists_full(self.options.microarchitecture):
-                    close = march_close_name(str(self.options.microarchitecture))
-                    if not self.options.fix_march:
-                        # self.output.error("fixed_march: %s" % (fixed_march,))
-
-                        if len(close) > 0:
-                            raise Exception ("Microarchitecture '%s' is not recognized. Did you mean '%s'?." % (self.options.microarchitecture, close[0]))
-                            # self.output.error("Microarchitecture '%s' is not recognized. Did you mean '%s'?." % (self.options.microarchitecture, close[0]))
-                            # sys.exit
-                        else:
-                            raise Exception ("Microarchitecture '%s' is not recognized." % (self.options.microarchitecture,))
-                            # self.output.error("Microarchitecture '%s' is not recognized." % (self.options.microarchitecture,))
-                            # sys.exit
-                    else:
-                        if len(close) > 0:
-                            fixed_march = get_march(close[0], str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version)))
-                        else:
-                            fixed_march = get_march(self.options.microarchitecture, str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version)))
-
-                        self.output.warn("Microarchitecture '%s' is not recognized, but it will be automatically fixed to '%s'." % (self.options.microarchitecture, fixed_march))
-                        self.options.microarchitecture = fixed_march
-
-                if not march_exists_in(self.options.microarchitecture, str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version))):
-                    fixed_march = get_march(self.options.microarchitecture, str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version)))
-                    if not self.options.fix_march:
-                        raise Exception ("Microarchitecture '%s' is not supported by your compiler, you could use '%s'." % (self.options.microarchitecture,fixed_march))
-                        # self.output.error("Microarchitecture '%s' is not supported by your compiler, you could use '%s'." % (self.options.microarchitecture,fixed_march))
-                        # sys.exit
-                    else:
-                        self.output.warn("Microarchitecture '%s' is not supported by your compiler, but it will be automatically fixed to '%s'." % (self.options.microarchitecture, fixed_march))
-
-
-            fixed_march = get_march(self.options.microarchitecture, str(self.settings.os), str(self.settings.compiler), float(str(self.settings.compiler.version)))
-    
-            if march_from == 'user defined':
-                self.output.info("Provided microarchitecture (%s): %s" % (march_from, self.options.microarchitecture))
-            else:
-                self.output.info("Detected microarchitecture (%s): %s" % (march_from, self.options.microarchitecture))
-
-            if self.options.microarchitecture != fixed_march:
-                self.options.microarchitecture = fixed_march
-                self.output.info("Corrected microarchitecture for compiler: %s" % (self.options.microarchitecture,))
-
-            # self.options["*"].microarchitecture = 'skylake'
+            march_conan_manip(self)
             self.options["*"].microarchitecture = self.options.microarchitecture
 
     def package_id(self):
@@ -251,9 +177,7 @@ class Secp256k1Conan(ConanFile):
 
         cmake.definitions["USE_CONAN"] = option_on_off(True)
         cmake.definitions["NO_CONAN_AT_ALL"] = option_on_off(False)
-        # cmake.definitions["CMAKE_VERBOSE_MAKEFILE"] = option_on_off(False)
         cmake.verbose = self.options.verbose
-
         cmake.definitions["ENABLE_SHARED"] = option_on_off(self.is_shared)
         cmake.definitions["ENABLE_POSITION_INDEPENDENT_CODE"] = option_on_off(self.fPIC_enabled)
 
@@ -278,6 +202,12 @@ class Secp256k1Conan(ConanFile):
 
         cmake.definitions["WITH_BIGNUM"] = self.bignum_lib_name
 
+        # cmake.definitions["WITH_ASM"] = option_on_off(self.options.with_asm)
+        # cmake.definitions["WITH_FIELD"] = option_on_off(self.options.with_field)
+        # cmake.definitions["WITH_SCALAR"] = option_on_off(self.options.with_scalar)
+        # cmake.definitions["WITH_BIGNUM"] = option_on_off(self.options.with_bignum)
+
+
         cmake.definitions["MICROARCHITECTURE"] = self.options.microarchitecture
 
         if self.settings.os == "Windows":
@@ -296,28 +226,7 @@ class Secp256k1Conan(ConanFile):
 
 
 
-
-        # cmake.definitions["WITH_ASM"] = option_on_off(self.options.with_asm)
-        # cmake.definitions["WITH_FIELD"] = option_on_off(self.options.with_field)
-        # cmake.definitions["WITH_SCALAR"] = option_on_off(self.options.with_scalar)
-        # cmake.definitions["WITH_BIGNUM"] = option_on_off(self.options.with_bignum)
-
-        if self.settings.compiler != "Visual Studio":
-            # gcc_march = str(self.options.microarchitecture).replace('_', '-')
-            gcc_march = str(self.options.microarchitecture)
-            cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " -march=" + gcc_march
-            cmake.definitions["CONAN_C_FLAGS"] = cmake.definitions.get("CONAN_C_FLAGS", "") + " -march=" + gcc_march
-        else:
-            ext = msvc_to_ext(str(self.options.microarchitecture))
-
-            if ext is not None:
-                # self.output.info("*********************** ext: %s" % (ext,))
-                cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " /arch:" + ext
-                cmake.definitions["CONAN_C_FLAGS"] = cmake.definitions.get("CONAN_C_FLAGS", "") + " /arch:" + ext
-            # else:
-            #     self.output.info("*********************** ext is None")
-
-        # microarchitecture_default
+        pass_march_to_compiler(self, cmake)
 
         cmake.definitions["BITPRIM_BUILD_NUMBER"] = os.getenv('BITPRIM_BUILD_NUMBER', '-')
         cmake.configure(source_dir=self.source_folder)
