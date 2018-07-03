@@ -93,6 +93,7 @@ script:
       ./.travis/push_other_repo.sh
     else
       cd ${TRAVIS_BUILD_DIR}
+      ls -ltra ci_utils
       chmod +x ci_utils/.travis/run.sh
       ./ci_utils/.travis/run.sh
     fi  
