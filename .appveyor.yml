@@ -157,7 +157,7 @@ for:
   -
     branches:
       only:
-        - /master/
+        - master
       install: 
         - echo "Stable packages are published in Release branches"
       test_script:
