@@ -158,10 +158,10 @@ for:
     branches:
       only:
         - master
-      install: 
-        - echo "Stable packages are published in Release branches"
       test_script:
         - echo "Stable packages are published in Release branches"
+      # install: 
+      #   - echo "Stable packages are published in Release branches"
 
 
 # MINGW_CONFIGURATIONS: "4.9@x86_64@seh@posix" 
