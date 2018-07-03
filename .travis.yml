@@ -19,7 +19,7 @@
 
 branches:
   only:
-  # - master
+  - master
   # - /^v\d+\.\d+\.\d+$/
   - dev
   - /^release-\d+\.\d+\.\d+$/
@@ -251,6 +251,14 @@ jobs:
           - chmod +x .travis/push_other_repo.sh
           - ./.travis/push_other_repo.sh
       if: branch =~ /^(dev|feature).+$/
+
+# Dummy for master ------------------------------------------------------
+    - stage: build and upload binaries
+      install: 
+        - echo "Stable packages are published in Release branches"
+      script:
+        - echo "Stable packages are published in Release branches"
+      if: branch =~ /^master$/
 
 
 # # Integration Tests ------------------------------------------------------
