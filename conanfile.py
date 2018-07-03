@@ -22,7 +22,7 @@ import os
 from conans import ConanFile, CMake
 from conans import __version__ as conan_version
 from conans.model.version import Version
-from ci_utils.utils import option_on_off, get_version, get_conan_req_version, march_conan_manip, pass_march_to_compiler
+from ci_utils import option_on_off, get_version, get_conan_req_version, march_conan_manip, pass_march_to_compiler
 
 class Secp256k1Conan(ConanFile):
     name = "secp256k1"
