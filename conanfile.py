@@ -51,6 +51,8 @@ class Secp256k1Conan(BitprimConanFile):
                "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
                "fix_march": [True, False],
                "verbose": [True, False],
+               "cxxflags": "ANY",
+               "cflags": "ANY",
 
                
             #    "with_bignum": ["conan", "auto", "system", "no"]
@@ -79,7 +81,9 @@ class Secp256k1Conan(BitprimConanFile):
         "with_bignum_lib=True", \
         "microarchitecture=_DUMMY_",  \
         "fix_march=False", \
-        "verbose=False"
+        "verbose=False", \
+        "cxxflags=_DUMMY_", \
+        "cflags=_DUMMY_"
 
         # "with_bignum=conan"
         # "with_asm='auto'", \
@@ -142,6 +146,8 @@ class Secp256k1Conan(BitprimConanFile):
         self.info.options.with_openssl_tests = "ANY"
         self.info.options.verbose = "ANY"
         self.info.options.fix_march = "ANY"
+        self.info.options.cxxflags = "ANY"
+        self.info.options.cflags = "ANY"
 
         # if self.settings.compiler == "Visual Studio":
         #     self.info.options.microarchitecture = "ANY"
@@ -153,6 +159,12 @@ class Secp256k1Conan(BitprimConanFile):
         cmake.verbose = self.options.verbose
         cmake.definitions["ENABLE_SHARED"] = option_on_off(self.is_shared)
         cmake.definitions["ENABLE_POSITION_INDEPENDENT_CODE"] = option_on_off(self.fPIC_enabled)
+
+        if self.options.cxxflags != "_DUMMY_":
+            cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " " + str(self.options.cxxflags)
+        if self.options.cflags != "_DUMMY_":
+            cmake.definitions["CONAN_C_FLAGS"] = cmake.definitions.get("CONAN_C_FLAGS", "") + " " + str(self.options.cflags)
+
 
         cmake.definitions["ENABLE_BENCHMARK"] = option_on_off(self.options.with_benchmark)
         cmake.definitions["ENABLE_TESTS"] = option_on_off(self.options.with_tests)
